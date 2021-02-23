@@ -11,32 +11,41 @@ class Employees:
         self.address = address
         self.phone = phone
         self.salary = salary
-    
+
+    # base class method
     def __repr__(self):
         return (f'First name: {self.first_name}\nLast name: {self.last_name}\nPosition: {self.position}\nAddress: {self.address}\nPhone: {self.phone}\nSalary: {self.salary}')
 
 
 class Managers(Employees):
-    def __init__(self, first_name, last_name, position, address, phone, salary, manager_type, managers_count):
+    def __init__(self, first_name, last_name, position, address, phone, salary, manager_type, subordinates_count):
         super().__init__(first_name, last_name, position, address, phone, salary)
         self.manager_type = manager_type
-        self.managers_count = managers_count
+        self.subordinates_count = subordinates_count
 
+    # override base class method
     def __repr__(self):
-        return (f'First name: {self.first_name}\nManager type: {self.manager_type}')
+        return (f'{super().__repr__()}\nManager type: {self.manager_type}\nSubordinates count: {self.subordinates_count}')
 
 
 class ShareHolders(Managers):
-    def __init__(self, first_name, last_name, position, address, phone, salary, manager_type, managers_count, shareholder_type, shares_percentage):
-        super().__init__(first_name, last_name, position, address, phone, salary, manager_type, managers_count)
+    def __init__(self, first_name, last_name, position, address, phone, salary, manager_type, subordinates_count, shareholder_type, shares_percentage):
+        super().__init__(first_name, last_name, position, address,
+                         phone, salary, manager_type, subordinates_count)
         self.shareholder_type = shareholder_type
         self.shares_percentage = shares_percentage
 
+    # override base class method
     def __repr__(self):
-        return (f'First name: {self.first_name}\nShareholder type: {self.shareholder_type}')
+        return (f'{super().__repr__()}\nShareholder type: {self.shareholder_type}\nShares percentage: {self.shares_percentage}')
 
 
-# emp = Employees('Christian', 'Scorohodco', 'CEO', 'Chisinau', '+37369701911', '10000 MDL')
-# mng = Managers('Christian', 'Scorohodco', 'CEO', 'Chisinau', '+37369701911', '10000 MDL', 'IT Project Manager', 1)
-# print(emp)
-# print(f'\n{mng}')
+employee = Employees('Christian', 'Scorohodco', 'CEO',
+                     'Chisinau', '+37369701911', '10000 MDL')
+manager = Managers('Christian', 'Scorohodco', 'CEO', 'Chisinau',
+                   '+37369701911', '10000 MDL', 'IT Project Manager', 25)
+shareholder = ShareHolders('Christian', 'Scorohodco', 'CEO', 'Chisinau',
+                           '+37369701911', '10000 MDL', 'IT Project Manager', 25, 'Major', 100)
+print(employee)
+print(f'\n\n{manager}')
+print(f'\n\n{shareholder}')
